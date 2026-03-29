@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My History | Pulo NHS Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-book-open"></i>
+            <span>Pulo NHS Library</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="studentdashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+            <li><a href="catalog.html"><i class="fas fa-search"></i> Browse Catalog</a></li>
+            <li><a href="history.html" class="active"><i class="fas fa-history"></i> My History</a></li>
+            <li><a href="profile.html"><i class="fas fa-qrcode"></i> Profile</a></li>
+        </ul>
+        <div class="sidebar-footer">© 2026 Pulo National HS</div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                <div class="user-welcome">
+                    <h2>Borrowing History</h2>
+                    <p>Review your past library activity</p>
+                </div>
+            </div>
+            <div class="topbar-actions">
+                <a href="../index.html" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <div class="table-container">
+                <h2 class="section-title"><i class="fas fa-history"></i> Borrowing History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Book Title</th>
+                            <th>Author</th>
+                            <th>Borrowed</th>
+                            <th>Returned</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Animal Farm</strong></td>
+                            <td>George Orwell</td>
+                            <td>Dec 15, 2025</td>
+                            <td>Dec 20, 2025</td>
+                            <td><span class="badge status-ontime">ON TIME</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Brave New World</strong></td>
+                            <td>Aldous Huxley</td>
+                            <td>Dec 1, 2025</td>
+                            <td>Dec 10, 2025</td>
+                            <td><span class="badge status-overdue-history">OVERDUE (2 DAYS)</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lord of the Flies</strong></td>
+                            <td>William Golding</td>
+                            <td>Nov 20, 2025</td>
+                            <td>Nov 25, 2025</td>
+                            <td><span class="badge status-ontime">ON TIME</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('mainContent').classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>

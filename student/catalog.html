@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalog | Pulo NHS Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-book-open"></i>
+            <span>Pulo NHS Library</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="studentdashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+            <li><a href="#" class="active"><i class="fas fa-search"></i> Browse Catalog</a></li>
+            <li><a href="history.html"><i class="fas fa-history"></i> My History</a></li>
+            <li><a href="profile.html"><i class="fas fa-qrcode"></i> Profile</a></li>
+        </ul>
+        <div class="sidebar-footer">© 2026 Pulo National HS</div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                <div class="user-welcome">
+                    <h2>Book Catalog</h2>
+                    <p>Find your next favorite read</p>
+                </div>
+            </div>
+            <div class="topbar-actions">
+                <a href="../index.html" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Search books by title, author, or ISBN..." class="search-input">
+            </div>
+
+            <div class="catalog-grid">
+                <div class="book-card-alt">
+                    <div class="book-cover color-teal">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="book-info-alt">
+                        <h3>Pride and Prejudice</h3>
+                        <p class="author">Jane Austen</p>
+                        <div class="book-footer-alt">
+                            <span class="isbn"><i class="fas fa-qrcode"></i> QR-101</span>
+                            <span class="status-pill available">AVAILABLE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card-alt">
+                    <div class="book-cover color-green">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="book-info-alt">
+                        <h3>The Catcher in the Rye</h3>
+                        <p class="author">J.D. Salinger</p>
+                        <div class="book-footer-alt">
+                            <span class="isbn"><i class="fas fa-qrcode"></i> QR-102</span>
+                            <span class="status-pill available">AVAILABLE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card-alt">
+                    <div class="book-cover color-maroon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="book-info-alt">
+                        <h3>Moby Dick</h3>
+                        <p class="author">Herman Melville</p>
+                        <div class="book-footer-alt">
+                            <span class="isbn"><i class="fas fa-qrcode"></i> QR-103</span>
+                            <span class="status-pill borrowed">BORROWED</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card-alt">
+                    <div class="book-cover color-orange">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="book-info-alt">
+                        <h3>The Great Gatsby</h3>
+                        <p class="author">F. Scott Fitzgerald</p>
+                        <div class="book-footer-alt">
+                            <span class="isbn"><i class="fas fa-qrcode"></i> QR-104</span>
+                            <span class="status-pill available">AVAILABLE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('mainContent').classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>

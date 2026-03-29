@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital ID | Pulo NHS Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-book-open"></i>
+            <span>Pulo NHS Library</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="studentdashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+            <li><a href="catalog.html"><i class="fas fa-search"></i> Browse Catalog</a></li>
+            <li><a href="history.html"><i class="fas fa-history"></i> My History</a></li>
+            <li><a href="profile.html" class="active"><i class="fas fa-qrcode"></i> Profile</a></li>
+        </ul>
+        <div class="sidebar-footer">© 2026 Pulo National HS</div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                <div class="user-welcome">
+                    <h2>Student Profile</h2>
+                    <p>Verified Library Identity</p>
+                </div>
+            </div>
+            <div class="topbar-actions">
+                <a href="../index.html"class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <div class="profile-card">
+                <div class="profile-header-bg">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+
+                <div class="profile-details">
+                    <div class="profile-main-info">
+                        <h1>Zabrina Mae Santos</h1>
+                        <span class="badge active-badge">VERIFIED STUDENT</span>
+                    </div>
+
+                    <div class="info-tiles-grid">
+                        <div class="info-tile">
+                            <label>Student ID</label>
+                            <p>2026-10452</p>
+                        </div>
+                        <div class="info-tile">
+                            <label>Grade & Section</label>
+                            <p>Grade 10 - Rizal</p>
+                        </div>
+                        <div class="info-tile">
+                            <label>Email Address</label>
+                            <p>zabrina.santos@pulonhs.edu.ph</p>
+                        </div>
+                        <div class="info-tile">
+                            <label>Library Group</label>
+                            <p>Senior Members</p>
+                        </div>
+                        <div class="info-tile">
+                            <label>Registration Date</label>
+                            <p>January 10, 2026</p>
+                        </div>
+                        <div class="info-tile">
+                            <label>Account Status</label>
+                            <p style="color: #2d6a4f; font-weight: bold;">Active</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('mainContent').classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>

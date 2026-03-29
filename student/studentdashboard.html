@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Pulo NHS Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-book-open"></i>
+            <span>Pulo NHS Library</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="studentdashboard.html" class="active"><i class="fas fa-th-large"></i> Dashboard</a></li>
+            
+            <li><a href="catalog.html"><i class="fas fa-search"></i> Browse Catalog</a></li>
+             
+            <li><a href="history.html"><i class="fas fa-history"></i> My History</a></li>
+            <li><a href="profile.html"><i class="fas fa-qrcode"></i> Profile</a></li>
+        </ul>
+        <div class="sidebar-footer">© 2026 Pulo National HS</div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                <div class="user-welcome">
+                    <h2>Dashboard</h2>
+                    <p>Welcome back, <strong>Zabrina!</strong></p>
+                </div>
+            </div>
+            <div class="topbar-actions">
+                <a href="../index.html" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-school"></i> About Pulo NHS</h3>
+                    <p>A premier institution dedicated to academic excellence and the holistic development of our students.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-star"></i> What to Expect</h3>
+                    <ul class="expect-list">
+                        <li><i class="fas fa-check-circle"></i> Easy Monitoring of Books to keep records straight</li>
+                        <li><i class="fas fa-check-circle"></i> Real-time tracking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon b-green"><i class="fas fa-book"></i></div>
+                    <div class="stat-info"><h3>12</h3><p>Borrowed</p></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon b-gold"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="stat-info"><h3>0</h3><p>Overdue</p></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon b-blue"><i class="fas fa-bookmark"></i></div>
+                    <div class="stat-info"><h3>5</h3><p>Saved</p></div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <h2 class="section-title">📖 My Current Books</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Book Title</th>
+                            <th>Author</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>The Great Gatsby</strong></td>
+                            <td>F. Scott Fitzgerald</td>
+                            <td>Jan 31, 2026</td>
+                            <td><span class="badge active-badge">ACTIVE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1984</strong></td>
+                            <td>George Orwell</td>
+                            <td>Jan 22, 2026</td>
+                            <td><span class="badge due-badge">DUE SOON</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('mainContent').classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>
