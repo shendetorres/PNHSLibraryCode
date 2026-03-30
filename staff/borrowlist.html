@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrow List | PNHS Staff</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-book-reader"></i>
+            <span>PNHS Staff</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="staffdashboard.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+            <li><a href="catalog.html"><i class="fas fa-book"></i><span>Browse Catalog</span></a></li>
+            <li><a href="#" class="active"><i class="fas fa-clipboard-list"></i><span>Borrow List</span></a></li>
+            <li><a href="returnlist.html"><i class="fas fa-history"></i><span>Returned Books</span></a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>© 2026 PNHS Library System</p>
+        </div>
+    </nav>
+
+    <main class="main-content" id="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="hamburger" id="toggleBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h2>Active Borrowers List</h2>
+            </div>
+            
+            <div class="topbar-right">
+                <div class="user-profile">
+                    <span>Staff Librarian</span>
+                    <div class="avatar-circle">LI</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <div class="table-header" style="margin-bottom: 25px;">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="listSearch" placeholder="Search by student name, ID, or book title...">
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Details</th>
+                            <th>Book Borrowed</th>
+                            <th>Date Issued</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="borrowTable">
+                        <tr>
+                            <td>
+                                <div class="student-cell">
+                                    <img src="https://ui-avatars.com/api/?name=Zabrina+Guarico&background=random" alt="">
+                                    <div>
+                                        <p style="font-weight: 600;">Zabrina Guarico</p>
+                                        <small style="color: #888;">ID: 2024-0012</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Software Engineering</td>
+                            <td>Mar 25, 2026</td>
+                            <td>Mar 30, 2026</td>
+                            <td><span class="badge due-badge">Due Today</span></td>
+                            <td>
+                                <button class="btn-return" onclick="processReturn('Software Engineering')">Mark Returned</button>
+                            </td>
+                        </tr>
+
+                        <tr class="overdue-row">
+                            <td>
+                                <div class="student-cell">
+                                    <img src="https://ui-avatars.com/api/?name=Mark+Santos&background=random" alt="">
+                                    <div>
+                                        <p style="font-weight: 600;">Mark Santos</p>
+                                        <small style="color: #888;">ID: 2023-0544</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Database Systems</td>
+                            <td>Mar 10, 2026</td>
+                            <td>Mar 17, 2026</td>
+                            <td><span class="badge overdue-badge">Overdue (13 Days)</span></td>
+                            <td>
+                                <button class="btn-return" onclick="processReturn('Database Systems')">Mark Returned</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="student-cell">
+                                    <img src="https://ui-avatars.com/api/?name=Elena+Cruz&background=random" alt="">
+                                    <div>
+                                        <p style="font-weight: 600;">Elena Cruz</p>
+                                        <small style="color: #888;">ID: 2024-0882</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Clean Code</td>
+                            <td>Mar 28, 2026</td>
+                            <td>Apr 05, 2026</td>
+                            <td><span class="badge active-badge">On Loan</span></td>
+                            <td>
+                                <button class="btn-return" onclick="processReturn('Clean Code')">Mark Returned</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const toggleBtn = document.getElementById('toggleBtn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        // Sidebar Toggle
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+        });
+
+        // Search Filter
+        document.getElementById('listSearch').addEventListener('keyup', function() {
+            let value = this.value.toLowerCase();
+            let rows = document.querySelectorAll('#borrowTable tr');
+            
+            rows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(value) ? '' : 'none';
+            });
+        });
+
+        // Return Processing
+        function processReturn(bookTitle) {
+            if(confirm(`Process return for "${bookTitle}"?`)) {
+                alert("Book returned successfully and inventory updated.");
+            }
+        }
+    </script>
+</body>
+</html>

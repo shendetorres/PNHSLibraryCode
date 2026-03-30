@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returned History | PNHS Staff</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-book-reader"></i>
+            <span>PNHS Staff</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="staffdashboard.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+            <li><a href="catalog.html"><i class="fas fa-book"></i><span>Browse Catalog</span></a></li>
+            <li><a href="borrowlist.html"><i class="fas fa-clipboard-list"></i><span>Borrow List</span></a></li>
+            <li><a href="#" class="active"><i class="fas fa-history"></i><span>Returned Books</span></a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>© 2026 PNHS Library System</p>
+        </div>
+    </nav>
+
+    <main class="main-content" id="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="hamburger" id="toggleBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h2>Return History Log</h2>
+            </div>
+            
+            <div class="topbar-right">
+                <div class="user-profile">
+                    <span>Staff Librarian</span>
+                    <div class="avatar-circle">LI</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <div class="table-header" style="margin-bottom: 25px;">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="historySearch" placeholder="Search by student, book, or Transaction ID...">
+                </div>
+                <div class="header-actions">
+                    <button class="btn-primary" style="background: var(--white); color: var(--primary); border: 1px solid var(--primary);">
+                        <i class="fas fa-file-export"></i> Export Log
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Student Name</th>
+                            <th>Book Title</th>
+                            <th>Return Date</th>
+                            <th>Condition</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTable">
+                        <tr>
+                            <td style="font-family: monospace; color: var(--text-muted);">#TR-8821</td>
+                            <td><strong>Zabrina Guarico</strong></td>
+                            <td>Data Structures</td>
+                            <td>Mar 29, 2026</td>
+                            <td>Good</td>
+                            <td><span class="badge active-badge">Completed</span></td>
+                        </tr>
+
+                        <tr>
+                            <td style="font-family: monospace; color: var(--text-muted);">#TR-8755</td>
+                            <td><strong>Mark Santos</strong></td>
+                            <td>Operating Systems</td>
+                            <td>Mar 28, 2026</td>
+                            <td>Worn</td>
+                            <td><span class="badge active-badge">Completed</span></td>
+                        </tr>
+
+                        <tr>
+                            <td style="font-family: monospace; color: var(--text-muted);">#TR-8690</td>
+                            <td><strong>Elena Cruz</strong></td>
+                            <td>Clean Code</td>
+                            <td>Mar 27, 2026</td>
+                            <td>Excellent</td>
+                            <td><span class="badge active-badge">Completed</span></td>
+                        </tr>
+
+                        <tr>
+                            <td style="font-family: monospace; color: var(--text-muted);">#TR-8644</td>
+                            <td><strong>John Doe</strong></td>
+                            <td>Java Programming</td>
+                            <td>Mar 25, 2026</td>
+                            <td style="color: var(--danger); font-weight: 600;">Damaged</td>
+                            <td><span class="badge active-badge">Penalty Paid</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const toggleBtn = document.getElementById('toggleBtn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        // Sidebar Toggle
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+        });
+
+        // Search Filter Logic
+        document.getElementById('historySearch').addEventListener('keyup', function() {
+            let value = this.value.toLowerCase();
+            let rows = document.querySelectorAll('#historyTable tr');
+            
+            rows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(value) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

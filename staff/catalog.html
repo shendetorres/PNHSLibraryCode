@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor Catalog | PNHS Staff</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-book-reader"></i>
+            <span>PNHS Staff</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="staffdashboard.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+            <li><a href="#" class="active"><i class="fas fa-book"></i><span>Browse Catalog</span></a></li>
+            <li><a href="borrowlist.html"><i class="fas fa-clipboard-list"></i><span>Borrow List</span></a></li>
+            <li><a href="returnlist.html"><i class="fas fa-history"></i><span>Returned Books</span></a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>© 2026 PNHS Library System</p>
+        </div>
+    </nav>
+
+    <main class="main-content" id="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="hamburger" id="toggleBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h2>Library Inventory Monitor</h2>
+            </div>
+            
+            <div class="topbar-right">
+                <div class="user-profile">
+                    <span>Staff Librarian</span>
+                    <div class="avatar-circle">LI</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <div class="table-header" style="margin-bottom: 30px;">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="catalogSearch" placeholder="Search title, author, or ISBN...">
+                </div>
+                
+                <div class="filter-wrapper">
+                    <select id="stockFilter" class="form-control" style="width: auto; margin-bottom: 0;">
+                        <option value="all">All Inventory</option>
+                        <option value="available">Available Only</option>
+                        <option value="low">Low Stock Alert</option>
+                        <option value="out">Out of Stock</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="catalog-grid" id="catalogGrid">
+                
+                <div class="book-card-alt" data-status="available">
+                    <i class="fas fa-microchip card-icon"></i>
+                    <div class="book-info-alt">
+                        <h3>Software Engineering</h3>
+                        <p class="author">Ian Sommerville</p>
+                        <p class="isbn-text">978-0133943030</p>
+                        <div class="book-footer-alt">
+                            <span class="badge active-badge">12 Available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card-alt" data-status="low">
+                    <i class="fas fa-database card-icon"></i>
+                    <div class="book-info-alt">
+                        <h3>Database Systems</h3>
+                        <p class="author">C.J. Date</p>
+                        <p class="isbn-text">978-0321197849</p>
+                        <div class="book-footer-alt">
+                            <span class="badge due-badge">2 Left</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card-alt" data-status="available">
+                    <i class="fas fa-file-code card-icon"></i>
+                    <div class="book-info-alt">
+                        <h3>Clean Code</h3>
+                        <p class="author">Robert C. Martin</p>
+                        <p class="isbn-text">978-0132350884</p>
+                        <div class="book-footer-alt">
+                            <span class="badge active-badge">8 Available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card-alt" data-status="out">
+                    <i class="fas fa-project-diagram card-icon"></i>
+                    <div class="book-info-alt">
+                        <h3>Design Patterns</h3>
+                        <p class="author">Erich Gamma</p>
+                        <p class="isbn-text">978-0201633610</p>
+                        <div class="book-footer-alt">
+                            <span class="badge overdue-badge">Out of Stock</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const toggleBtn = document.getElementById('toggleBtn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+        const catalogSearch = document.getElementById('catalogSearch');
+        const stockFilter = document.getElementById('stockFilter');
+        const bookCards = document.querySelectorAll('.book-card-alt');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+        });
+
+        function filterCatalog() {
+            const term = catalogSearch.value.toLowerCase();
+            const filterValue = stockFilter.value;
+
+            bookCards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                const author = card.querySelector('.author').innerText.toLowerCase();
+                const isbn = card.querySelector('.isbn-text').innerText.toLowerCase();
+                const status = card.getAttribute('data-status');
+
+                const matchesSearch = title.includes(term) || author.includes(term) || isbn.includes(term);
+                const matchesFilter = filterValue === 'all' || status === filterValue;
+
+                card.style.display = (matchesSearch && matchesFilter) ? '' : 'none';
+            });
+        }
+
+        catalogSearch.addEventListener('input', filterCatalog);
+        stockFilter.addEventListener('change', filterCatalog);
+    </script>
+</body>
+</html>
