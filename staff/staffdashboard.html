@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard | PNHS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-book-reader"></i>
+            <span>PNHS Staff</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" class="active"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+            <li><a href="#"><i class="fas fa-book"></i><span>Browse Catalog</span></a></li>
+            <li><a href="#"><i class="fas fa-clipboard-list"></i><span>Borrow List</span></a></li>
+            <li><a href="#"><i class="fas fa-history"></i><span>Returned Books</span></a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>© 2026 PNHS Library System</p>
+        </div>
+    </nav>
+
+    <main class="main-content" id="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="hamburger" id="toggleBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h2>Librarian Dashboard</h2>
+            </div>
+            
+            <div class="topbar-right">
+                <div class="user-profile">
+                    <span>Admin Librarian</span>
+                    <div class="avatar-circle">LI</div>
+                </div>
+                <a href="../index.html" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon b-green"><i class="fas fa-book"></i></div>
+                    <div>
+                        <h3>42</h3>
+                        <p>Borrowed</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon b-gold"><i class="fas fa-undo"></i></div>
+                    <div>
+                        <h3>12</h3>
+                        <p>Returned Today</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon b-blue"><i class="fas fa-layer-group"></i></div>
+                    <div>
+                        <h3>150</h3>
+                        <p>Total Books</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Recent Borrowers</h3>
+                    <div class="header-actions">
+                        <div class="search-input-wrapper">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="tableSearch" placeholder="Search students or books...">
+                        </div>
+                        <button class="btn-new-transaction" id="openScannerBtn">
+                            <i class="fas fa-plus"></i> New Transaction
+                        </button>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Book Title</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="borrowerTable">
+                        <tr>
+                            <td>
+                                <div class="student-cell">
+                                    <img src="https://ui-avatars.com/api/?name=Zabrina+Guarico&background=random" alt="">
+                                    Zabrina Guarico
+                                </div>
+                            </td>
+                            <td>Software Engineering</td>
+                            <td>Mar 30, 2026</td>
+                            <td><span class="badge due-badge">Pending</span></td>
+                            <td><button class="action-btn"><i class="fas fa-ellipsis-h"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="student-cell">
+                                    <img src="https://ui-avatars.com/api/?name=John+Maxwell&background=random" alt="">
+                                    John Maxwell
+                                </div>
+                            </td>
+                            <td>Clean Code</td>
+                            <td>Apr 02, 2026</td>
+                            <td><span class="badge active-badge">Returned</span></td>
+                            <td><button class="action-btn"><i class="fas fa-ellipsis-h"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div class="scanner-modal" id="scannerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Scan Book QR Code</h3>
+                <button class="close-modal" id="closeModalBtn">&times;</button>
+            </div>
+            <div id="reader"></div>
+            <p class="scan-hint">Place the book QR code within the frame to scan.</p>
+        </div>
+    </div>
+
+    <script>
+        // 1. Sidebar Toggle Logic
+        const toggleBtn = document.getElementById('toggleBtn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+        });
+
+        // 2. Table Search Logic
+        const searchInput = document.getElementById('tableSearch');
+        const tableRows = document.querySelectorAll('#borrowerTable tr');
+
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            tableRows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(val) ? '' : 'none';
+            });
+        });
+
+        // 3. QR Scanner Logic
+        const scannerModal = document.getElementById('scannerModal');
+        const openScannerBtn = document.getElementById('openScannerBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const html5QrCode = new Html5Qrcode("reader");
+
+        openScannerBtn.addEventListener('click', () => {
+            scannerModal.style.display = 'flex';
+            html5QrCode.start(
+                { facingMode: "environment" }, 
+                { fps: 10, qrbox: { width: 250, height: 250 } },
+                (decodedText) => {
+                    alert("Scanned Code: " + decodedText);
+                    stopScanner();
+                }
+            ).catch(err => alert("Camera error: " + err));
+        });
+
+        function stopScanner() {
+            if(html5QrCode.getState() > 1) {
+                html5QrCode.stop().then(() => {
+                    scannerModal.style.display = 'none';
+                });
+            } else {
+                scannerModal.style.display = 'none';
+            }
+        }
+
+        closeModalBtn.addEventListener('click', stopScanner);
+        window.onclick = (e) => { if (e.target == scannerModal) stopScanner(); };
+    </script>
+</body>
+</html>
